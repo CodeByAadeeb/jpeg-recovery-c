@@ -25,16 +25,14 @@ int main(int argc, char *argv[])
         // Create JPEGs from the data
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
-            //how to make a condition for 1st jpeg
-            //i know that 000.jpeg is the first jpeg
+
             if (img == NULL)
             {
                 sprintf(filename, "%03i.jpg", file_count);
                 img = fopen(filename, "w");
                 fwrite(buffer, 1, 512, img);
                 file_count++;
-                // should i write all the 512 bytes bcoz there is a chance of slack space and should also be written
-                //if nit how to stop writing when the jpeg ends
+
             }
             else
             {
@@ -44,8 +42,7 @@ int main(int argc, char *argv[])
                 fwrite(buffer, 1, 512, img);
                 file_count++;
             }
-            //how to make the header for the jpeg
-            //to start writing in a new file
+
 
         }
         else
@@ -60,7 +57,6 @@ int main(int argc, char *argv[])
     fclose(img);
     fclose(card);
     return 0;
-    //i dont undertand are there 512 bytes in total in a memory card or the storage is grouped into 512 bytes each unit
-    //in the fread size parameter do i enter 512 bytes or like 4 bytes of 512 byte blocks
+ 
 
 }
